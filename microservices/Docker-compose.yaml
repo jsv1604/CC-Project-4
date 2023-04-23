@@ -1,0 +1,84 @@
+version: '3.3'
+
+services:
+  addition-service:
+    build: ./addition
+    ports:
+      - "5001:5001"
+    networks:
+      sample:
+        aliases:
+          - addition
+
+  subtraction-service:
+    build: ./subtraction
+    ports:
+      - "5002:5002"
+    networks:
+      sample:
+        aliases:
+          - subtraction
+
+  multiplication-service:
+    build: ./multiplication
+    ports:
+      - "5003:5003"
+    networks:
+      sample:
+        aliases:
+          - multiplication
+
+  division-service:
+    build: ./division
+    ports:
+      - "5004:5004"
+    networks:
+      sample:
+        aliases:
+          - division
+  gcd-service:
+    build: ./gcd
+    ports:
+      - "5005:5005"
+    networks:
+      sample:
+        aliases:
+          - gcd
+  mod-service:
+    build: ./mod
+    ports:
+      - "5006:5006"
+    networks:
+      sample:
+        aliases:
+          - modulus
+  equal-service:
+    build: ./equal
+    ports:
+      - "5007:5007"
+    networks:
+      sample:
+        aliases:
+          - equal
+  landing-service:
+    build: ./landing
+    hostname: landing-service
+    ports:
+      - "5050:5050"
+    depends_on:
+      - addition-service
+      - subtraction-service
+      - multiplication-service
+      - division-service
+      - mod-service
+      - equal-service
+      - gcd-service
+
+    networks:
+      sample:
+        aliases:
+          - landing-service
+  # Add more services below
+
+networks:
+  sample:
